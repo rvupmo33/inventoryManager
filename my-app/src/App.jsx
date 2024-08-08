@@ -4,14 +4,6 @@ import Pantry from "./pages/Pantry";
 import Grocery from "./pages/Grocery";
 
 function App() {
-  // const [item, setItem] = useState([]);
-  // const itemCollectionRef = collection(db, "inventory");
-  // useEffect(() => {
-  //   const getItems = async () => {
-  //     const data = await getDocs();
-  //   };
-  //   getItems();
-  // }, []);
   return (
     <>
       <Router>

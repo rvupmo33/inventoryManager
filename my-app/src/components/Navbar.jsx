@@ -1,6 +1,7 @@
 //
 
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
@@ -12,10 +13,8 @@ function Navbar() {
         </div>
         <div></div>
         <div className="navListContainer">
-          {/* <Link href="/">Pantry List</Link>
-          <Link href="/grocery">Grocery List</Link> */}
-          <a href="/">Pantry List</a>
-          <a href="/grocery">Grocery List</a>
+          <Link to="/">Pantry List</Link>
+          <Link to="/grocery">Grocery List</Link>
         </div>
       </header>
     </div>
