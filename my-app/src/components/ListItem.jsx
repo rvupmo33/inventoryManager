@@ -1,4 +1,3 @@
-//
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { colorMapping } from "../data/ColorMap";
@@ -14,6 +13,7 @@ function ListItem({
 }) {
   const categoryColor = colorMapping[itemCategory] || "gray";
 
+  const [isEditing, setIsEditing] = useState(false);
   const [updatedQuantity, setUpdatedQuantity] = useState("");
 
   const handleDeleteItem = () => {
@@ -21,18 +21,7 @@ function ListItem({
   };
 
   const toggleChangeInputs = () => {
-    const updateInput = document.getElementById("updateQuantity");
-    const updateBtn = document.getElementById("updateQuantityBtn");
-    console.log(updateBtn);
-    if (updateBtn.classList.contains("hidden")) {
-      updateBtn.classList.remove("hidden");
-      updateInput.classList.remove("hidden");
-      console.log("Button is now visible.");
-    } else {
-      updateBtn.classList.add("hidden");
-      updateInput.classList.add("hidden");
-      console.log("Button is now hidden.");
-    }
+    setIsEditing((prev) => !prev);
   };
 
   const handleUpdateItem = () => {
@@ -44,30 +33,28 @@ function ListItem({
   };
 
   return (
-    <>
-      <div className="listItemContainer">
-        <p>{itemName}</p>
-        <div className="listRightSideContainer">
-          <p style={{ backgroundColor: categoryColor }}>{itemCategory}</p>
-          <p>Quantity: {itemAmount}</p>
-          <input
-            type="number"
-            id="updateQuantity"
-            className="hidden"
-            onChange={(e) => setUpdatedQuantity(e.target.value)}
-          />
-          <button
-            id="updateQuantityBtn"
-            className="hidden"
-            onClick={handleUpdateItem}
-          >
-            Update
-          </button>
-          <EditIcon onClick={toggleChangeInputs} />
-          <DeleteIcon onClick={handleDeleteItem} />
-        </div>
+    <div className="listItemContainer">
+      <p>{itemName}</p>
+      <div className="listRightSideContainer">
+        <p style={{ backgroundColor: categoryColor }}>{itemCategory}</p>
+        <p>Quantity: {itemAmount}</p>
+        {isEditing ? (
+          <>
+            <input
+              type="number"
+              value={updatedQuantity}
+              className="updateQuantity"
+              onChange={(e) => setUpdatedQuantity(e.target.value)}
+            />
+            <button onClick={handleUpdateItem} className="editButton">
+              Update
+            </button>
+          </>
+        ) : null}
+        <EditIcon onClick={toggleChangeInputs} />
+        <DeleteIcon onClick={handleDeleteItem} />
       </div>
-    </>
+    </div>
   );
 }
 
